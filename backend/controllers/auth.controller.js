@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 
 import User from "../models/user.model.js";
+import generateTokerAndSetCookie from '../utils/generateToken.js';
 
 
 export const signup = async (req, res) =>{
@@ -36,14 +37,20 @@ export const signup = async (req, res) =>{
             profilePic: gender === "male" ? boyProfilePic : girlProfilePic 
         });
 
-        await newUser.save();
+        if(newUser){
+            // generate jwt token and set it in cookies
+            generateTokerAndSetCookie(newUser._id, res);
+            await newUser.save();
 
-        res.status(201).json({
-            _id : newUser._id,
-            fullName : newUser.fullName,
-            username : newUser.username,
-            profilePic : newUser.profilePic,
-        });
+            res.status(201).json({
+                _id : newUser._id,
+                fullName : newUser.fullName,
+                username : newUser.username,
+                profilePic : newUser.profilePic,
+            });
+        }else{
+            res.status(400).json({error : "invalid user data"});
+        }
 
     }catch(error)
     {
