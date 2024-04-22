@@ -1,3 +1,5 @@
+import bcrypt from 'bcryptjs';
+
 import User from "../models/user.model.js";
 
 
@@ -5,7 +7,7 @@ export const signup = async (req, res) =>{
     try{
 
         const { fullName, username, password, confirmPassword, gender } = req.body;
-        
+
         if(password !== confirmPassword)
         {
             return res.status(400).json({error: "Password doesn't match"});
@@ -19,7 +21,8 @@ export const signup = async (req, res) =>{
         }
 
         // HASH password
-
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
         // https://avatar.iran.liara.run/public/boy?username=Scott
 
         const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
@@ -28,7 +31,7 @@ export const signup = async (req, res) =>{
         const newUser = new User({
             fullName,
             username,
-            password,
+            password : hashedPassword,
             gender,
             profilePic: gender === "male" ? boyProfilePic : girlProfilePic 
         });
