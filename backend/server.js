@@ -12,7 +12,7 @@ dotenv.config();
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 // root route http://localhost:5000/
 // app.get("/", (req, res)=>{
