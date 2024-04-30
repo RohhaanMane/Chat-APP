@@ -1,3 +1,4 @@
+import GenderCheckBox from "./GenderCheckBox"
 
 const SignUp = () => {
   return (
@@ -36,7 +37,7 @@ const SignUp = () => {
           <input type="password" placeholder="Confirm password" className="w-full input input-bordered"/>
         </div>
 
-        {/* gender checkbox */}
+        <GenderCheckBox />
 
         <a href="#" className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block">
           Already have an account

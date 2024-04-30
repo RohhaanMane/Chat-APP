@@ -23,7 +23,7 @@ const Login = () => {
           </div>
           <a href="#" className="hover:underline hover:text-blue-600 mt-2 inline-block">{"Don't"} have an account?</a>
           <div>
-            <button className="btn btn-block btn-sm mt-2">Login</button>
+            <button className="btn btn-block btn-sm mt-2 border border-slate-700">Login</button>
           </div>
         </form>
       </div>
