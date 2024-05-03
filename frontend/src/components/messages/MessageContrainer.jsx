@@ -38,4 +38,4 @@ function NoChatSelected() {
             </div>
         </div>
     );
-};
+}
