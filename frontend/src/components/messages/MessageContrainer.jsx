@@ -7,7 +7,6 @@ import { useAuthContext } from "../../context/AuthContext";
 
 const MessageContrainer = () => {
     const { selectedConversation, setSelectedConversation } = useConversation();
-    const { authUser } = useAuthContext();
 
     useEffect(() => {
         // clean up function - will run when this component will unmount
