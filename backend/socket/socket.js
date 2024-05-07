@@ -13,13 +13,29 @@ const io = new Server(server, {
     },
 });
 
+// for online status
+const userSocketMap = {}; // { userId : socketId }
+
 io.on("connection", (socket) => {
     console.log("A user connected", socket.id);
 
+    const userId = socket.handshake.query.userId; // get userId sent by frontend (socketContext)
+
+    if (userId != "undefined") userSocketMap[userId] = socket.id;   // update the map, since it is updated we need to send and event to all connected clients
+
+    // io.emit() is used to send event to all connected clients 
+    io.emit("getOnlineUsers", Object.keys(userSocketMap));          // sends who is online and who is offline
+
     socket.on("disconnect", () => {
         console.log("User disconnected", socket.io);
+        delete userSocketMap[userId];
+        io.emit("getOnlineUsers", Object.keys(userSocketMap));          // sicnce userSocketMap updated again send event to clients
+        
     });
 });
 
+export { app, io, server };
 
-export {app, io, server}
+
+// socket.emit()   -> send event - to all clinets
+// socket.on()     -> listen those events
