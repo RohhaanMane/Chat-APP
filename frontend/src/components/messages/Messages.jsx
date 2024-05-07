@@ -1,18 +1,13 @@
-import Message from "./Message"
+import useGetMessages from "../../hooks/useGetMessages";
+import Message from "./Message";
 
 const Messages = () => {
-  return (
-    <div className="px-4 flex-1 overflow-auto">
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-      <Message />
-    </div>
-  )
-}
+    const { messages, loading } = useGetMessages();
+    return (
+        <div className="px-4 flex-1 overflow-auto">
+            
+        </div>
+    );
+};
 
-export default Messages
+export default Messages;
