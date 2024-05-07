@@ -15,7 +15,7 @@ export const SocketContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (authUser) {
-            const socket = io("http://localhost:5000", {
+            const socket = io("https://chit-chat-comet.onrender.com", {
                 query:{                                     // sending userId to backend
                     userId : authUser._id
                 }
