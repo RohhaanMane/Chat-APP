@@ -13,6 +13,11 @@ const io = new Server(server, {
     },
 });
 
+// this will give socket id of receiver when we pass receivers id
+export const getReceiverSocketId = (receiverId) => {                    // we'll be using it in message controller
+    return userSocketMap[receiverId];
+}
+
 // for online status
 const userSocketMap = {}; // { userId : socketId }
 
